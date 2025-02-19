@@ -42,3 +42,37 @@ exports.deleteState = async (req, res) => {
     res.status(500).json({ error: "Server error", details: error.message });
   }
 };
+
+exports.getStateByName = async (req, res) => {
+  try {
+    const { name } = req.query;
+    if (!name) {
+      return res.status(400).json({ message: "Please provide a state name" });
+    }
+
+    const state = await State.findOne({ name: { $regex: new RegExp(name, "i") } });
+
+    if (!state) {
+      return res.status(404).json({ message: "State not found" });
+    }
+
+    res.json(state);
+  } catch (error) {
+    res.status(500).json({ error: "Server error", details: error.message });
+  }
+};
+
+
+exports.getStateById = async (req, res) => {
+  try {
+    const state = await State.findById(req.params.id);
+
+    if (!state) {
+      return res.status(404).json({ message: "State not found" });
+    }
+
+    res.json(state);
+  } catch (error) {
+    res.status(500).json({ error: "Server error", details: error.message });
+  }
+};

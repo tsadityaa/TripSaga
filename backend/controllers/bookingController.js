@@ -20,7 +20,7 @@ exports.createBooking = async (req, res) => {
     const newBooking = new Booking({
       user: userId,
       package: packageId,
-      travelers,
+      travelers:nooftravelers,
       totalPrice,
       status: "Pending",
     });
@@ -45,13 +45,14 @@ exports.getAllBookings = async (req, res) => {
 // 📌 Get user's bookings (User Only)
 exports.getUserBookings = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user._id;
     const bookings = await Booking.find({ user: userId }).populate("package", "title price");
     res.json(bookings);
   } catch (error) {
     res.status(500).json({ error: "Server error", details: error.message });
   }
 };
+
 
 // 📌 Cancel a booking (Admin Only)
 exports.cancelBooking = async (req, res) => {
