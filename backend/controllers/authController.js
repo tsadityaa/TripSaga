@@ -37,14 +37,16 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
+    // console.log(email);
     const user = await User.findOne({ email });
-
+    // console.log(user);
     if (!user) return res.status(400).json({ msg: "Invalid Credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: "Invalid Credentials" });
 
     const token = await user.getJWT();
+    console.log(token);
     res.cookie("token", token, { httpOnly: true });
 
     res.json({ token, user: { name: user.name, email: user.email, role: "User" } });
@@ -83,7 +85,6 @@ exports.userlogout = async (req, res) => {
 
 
 // 📌 Admin Login
-const Admin = require("../models/Admin");
 
 exports.loginAdmin = async (req, res) => {
   try {
