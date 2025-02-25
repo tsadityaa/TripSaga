@@ -35,7 +35,7 @@ exports.addVlog = async (req, res) => {
       imageUrl,
       author,
     });
-
+    console.log(title);
     await newVlog.save();
     res.status(201).json({ message: "Vlog added successfully", vlog: newVlog });
   } catch (error) {

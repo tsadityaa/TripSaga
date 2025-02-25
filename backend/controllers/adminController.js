@@ -1,6 +1,6 @@
 const Admin = require("../models/Admin");
 const Contact = require("../models/Contact"); // For fetching contact messages
-const jwt = require("jsonwebtoken");
+
 const bcrypt = require("bcryptjs");
 
 
@@ -8,18 +8,19 @@ const bcrypt = require("bcryptjs");
 exports.registerAdmin = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
+    console.log(name+""+email);
     // Check if admin already exists
     let admin = await Admin.findOne({ email });
     if (admin) return res.status(400).json({ msg: "Admin already exists" });
+
+    admin = new Admin({ name, email, password });
+    await admin.save();
 
     // Create new admin
     const token = await admin.getJWT();
     res.cookie("token", token, { httpOnly: true });
     
-    admin = new Admin({ name, email, password });
-    await admin.save();
-
+    
     res.status(201).json({ msg: "Admin registered successfully" });
   } catch (error) {
     res.status(500).json({ error: "Server Error", details: error.message });
@@ -27,6 +28,14 @@ exports.registerAdmin = async (req, res) => {
 };
 
 // 📌 Admin login
+
+exports.adminlogout = async (req, res) => {
+  res.cookie("token", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true
+  });
+  res.send("Logout Successful!!");
+};
 
 
 exports.loginAdmin = async (req, res) => {

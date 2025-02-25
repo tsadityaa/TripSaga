@@ -33,7 +33,29 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-// 📌 User login
+// // 📌 User login
+// exports.loginUser = async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+//     // console.log(email);
+//     const user = await User.findOne({ email });
+//     console.log(user);
+//     if (!user) return res.status(400).json({ msg: "Invalid Credentials" });
+//     console.log(password+" "+user.password);
+//     const isMatch = await bcrypt.compare(password, user.password);
+//     console.log(isMatch);
+//     if (!isMatch) return res.status(400).json({ msg: "Invalid Credentials" });
+
+//     const token = await user.getJWT();
+//     console.log(token);
+//     res.cookie("token", token, { httpOnly: true });
+//     res.json({ token, user: { name: user.name, email: user.email, role: "User" } });
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
+
+
 exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;

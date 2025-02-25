@@ -1,12 +1,12 @@
 const express = require("express");
-const { registerAdmin, loginAdmin, getAdminDashboard, getAllContactMessages } = require("../controllers/adminController");
-const authMiddleware = require("../middleware/auth");
+const { registerAdmin, loginAdmin, getAdminDashboard, getAllContactMessages ,adminlogout} = require("../controllers/adminController");
+const {authMiddleware,adminAuth} = require("../middleware/auth");
 
 const router = express.Router();
 
 router.post("/register", registerAdmin); 
 router.post("/login", loginAdmin);
-router.get("/dashboard", authMiddleware, authMiddleware.adminAuth, getAdminDashboard);
-router.get("/contacts", authMiddleware, authMiddleware.adminAuth, getAllContactMessages);
-
+router.get("/dashboard", authMiddleware, adminAuth, getAdminDashboard);
+router.get("/contacts", authMiddleware, adminAuth, getAllContactMessages);
+router.get("/logout",adminlogout);
 module.exports = router;

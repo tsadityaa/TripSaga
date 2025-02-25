@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllStates, addState, deleteState } = require("../controllers/stateController");
+const { getAllStates, addState, deleteState,getStateById,getStateByName } = require("..controllers/stateController");
 const {authMiddleware,adminAuth} = require("../middleware/auth");
 
 const router = express.Router();
