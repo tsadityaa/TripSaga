@@ -6,9 +6,9 @@ exports.createBooking = async (req, res) => {
   try {
     const { packageId, nooftravelers } = req.body;
     const userId = req.user._id; // User ID from JWT token
-    console.log(packageId);
-    console.log(userId);
-    console.log(nooftravelers);
+    // console.log(packageId);
+    // console.log(userId);
+    // console.log(nooftravelers);
     
     // Check if package exists
     const packageData = await Package.findById(packageId);
