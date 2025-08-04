@@ -30,15 +30,7 @@ export default function AboutUs() {
   return (
     <div className="bg-background">
       <section className="relative overflow-hidden">
-        {/* <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.pexels.com/photos/2707756/pexels-photo-2707756.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-            alt="Travel landscape"
-            fill
-            className="object-cover brightness-[0.6]"
-            priority
-          />
-        </div> */}
+        
 
         <motion.div
           className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 text-primary mt-16"
