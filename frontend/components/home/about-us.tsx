@@ -18,8 +18,7 @@ export default function AboutUs() {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0]);
   const y = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [100, 0, 0, -100]);
 
-  // const teamRef = useRef(null);
-  // const teamInView = useInView(teamRef, { once: true, amount: 0.2 });
+ 
 
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true, amount: 0.2 });
